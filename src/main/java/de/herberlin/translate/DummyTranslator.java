@@ -11,7 +11,7 @@ public class DummyTranslator implements Translator {
 
     @Override
     public List<String> translate(List<String> list, String languageCode) {
-        List<String> result = new LinkedList();
+        List<String> result = new LinkedList<>();
         for (String s : list) {
             result.add(translate(s, languageCode));
         }
