@@ -1,5 +1,6 @@
 package de.herberlin.translate;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class DummyTranslator implements Translator {
@@ -10,6 +11,10 @@ public class DummyTranslator implements Translator {
 
     @Override
     public List<String> translate(List<String> list, String languageCode) {
-        return list;
+        List<String> result = new LinkedList();
+        for (String s : list) {
+            result.add(translate(s, languageCode));
+        }
+        return result;
     }
 }
