@@ -8,12 +8,14 @@ public class AndroidWalker implements FileWalker {
 
     private Translator translator;
     private File source;
+    private File baseDirectory;
     private Log log;
 
     @Override
     public void init(Translator translator, File source, Log log) {
         this.translator = translator;
         this.source = source;
+        baseDirectory = source.getParentFile();
         this.log = log;
     }
 

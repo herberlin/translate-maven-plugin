@@ -4,6 +4,7 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -14,7 +15,12 @@ import java.util.List;
 public class GoogleTranslator implements Translator {
     private Translate translate;
 
-    public void setCredentials(File credentialFile, String serviceUrl) throws IOException {
+    public void setCredentials(File credentialFile, String serviceUrl) throws IOException, MojoExecutionException {
+
+        if (!credentialFile.canRead()) {
+            throw new MojoExecutionException("Can't read certificate: " + credentialFile);
+        }
+
         GoogleCredentials credentials =
             GoogleCredentials.fromStream(new FileInputStream(credentialFile)).createScoped(serviceUrl);
         translate = TranslateOptions.newBuilder().setCredentials(credentials).build().getService();

@@ -35,9 +35,6 @@ public class TranslateMojo extends AbstractMojo {
 
     public void execute() throws MojoExecutionException {
 
-        if (!certificate.canRead()) {
-            throw new MojoExecutionException("Can't read certificate: " + certificate);
-        }
         if (!source.canRead()) {
             throw new MojoExecutionException("Can't read source: " + source);
         }
@@ -51,7 +48,7 @@ public class TranslateMojo extends AbstractMojo {
         Translator translator = new DummyTranslator();
         FileWalker fileWalker = null;
         try {
-            fileWalker = mode.executor.newInstance();
+            fileWalker = mode.executor.getDeclaredConstructor().newInstance();
         } catch (Exception e) {
             throw new MojoExecutionException("Error creating " + mode.executor, e);
         }
