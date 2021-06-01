@@ -1,0 +1,8 @@
+{
+  "common": {
+    "base": "exising",
+    "logbook": "existing",
+    "new_entry": "existing",
+    "error": "existing"
+  }
+}

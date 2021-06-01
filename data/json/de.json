@@ -1,0 +1,32 @@
+{
+  "entries": {
+    "title": "Boatbook",
+    "back": "zurück",
+    "last_entry": "Letzter Eintrag"
+  },
+  "common": {
+    "base": "Basiseintrag",
+    "logbook": "Logbook",
+    "new_entry": "Neuer Eintrag",
+    "error": "Fehler",
+    "correct": "Bitte korrigieren Sie Ihre Eingabe.",
+    "na": "Keine Angabe",
+    "quantity": "(Menge)",
+    "toolbar_close_text": "Wählen",
+    "speedunit": {
+      "kn": "Kn",
+      "kmh": "Km/h",
+      "mph": "Miles/h ",
+      "bf": "Beaufort",
+      "ms": "m/sec"
+    },
+    "distanceunit": {
+      "ft": "ft",
+      "m": "m"
+    },
+    "temperatureunit": [
+      "C", "F"
+    ],
+     "no_boat": "Unbekanntes Schiff"
+  }
+}
