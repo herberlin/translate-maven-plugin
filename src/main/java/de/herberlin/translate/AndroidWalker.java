@@ -86,12 +86,12 @@ public class AndroidWalker implements FileWalker {
             String nodeName = sourceNode.getAttributes().getNamedItem("name").getNodeValue();
             Node translatableNode = sourceNode.getAttributes().getNamedItem("translatable");
             if (translatableNode != null && "false".equals(translatableNode.getNodeValue())) {
-                log.debug("Node " + nodeName + " not translatable");
+                log.debug("Node: " + nodeName + " not translatable");
                 continue;
             }
             Node targetNode = targetNodeMap.get(nodeName);
             if (targetNode != null) {
-                log.debug("Node " + nodeName + " is already translated.");
+                log.debug("Node: " + nodeName + " is already translated.");
                 continue;
             }
             targetNode = target.createElement(STRING_TAG);
@@ -100,7 +100,7 @@ public class AndroidWalker implements FileWalker {
             writeChildrenAsText(st, sourceNode);
             String translated = sanitize(translator.translate(st.toString(), language));
             targetNode.setTextContent(translated);
-            log.debug(st + " -> " + translated);
+            log.debug("Translating: " + st + " -> " + translated);
 
             target.getDocumentElement().appendChild(targetNode);
 

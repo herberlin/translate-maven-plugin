@@ -28,11 +28,7 @@ public class GoogleTranslator implements Translator {
     }
 
     /**
-     * de or zh-CN
-     *
-     * @param text
-     * @param languageCode
-     * @return
+     * @param languageCode eg de or zh-CN
      */
     @Override
     public String translate(String text, String languageCode) {
