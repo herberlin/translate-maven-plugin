@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="warning">Warnung</string>
-	<string name="service_unavailable">Der GPS - Dienst steht nicht zur Verfügung.</string>
-	<string name="kph">kn</string>
+	<string name="warning">exiting</string>
+	<string name="service_unavailable">exiting</string>
+	<string name="kph">exiting</string>
 </resources>
