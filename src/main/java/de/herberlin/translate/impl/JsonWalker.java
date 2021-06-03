@@ -1,4 +1,4 @@
-package de.herberlin.translate;
+package de.herberlin.translate.impl;
 
 import com.google.api.client.json.JsonParser;
 import com.google.api.client.json.JsonToken;
@@ -6,6 +6,8 @@ import com.google.api.client.json.gson.GsonFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonWriter;
+import de.herberlin.translate.FileWalker;
+import de.herberlin.translate.Translator;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
 

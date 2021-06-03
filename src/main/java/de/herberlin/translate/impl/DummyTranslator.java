@@ -1,4 +1,6 @@
-package de.herberlin.translate;
+package de.herberlin.translate.impl;
+
+import de.herberlin.translate.Translator;
 
 import java.util.LinkedList;
 import java.util.List;

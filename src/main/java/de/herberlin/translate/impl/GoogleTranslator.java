@@ -1,9 +1,10 @@
-package de.herberlin.translate;
+package de.herberlin.translate.impl;
 
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+import de.herberlin.translate.Translator;
 import org.apache.maven.plugin.MojoExecutionException;
 
 import java.io.File;

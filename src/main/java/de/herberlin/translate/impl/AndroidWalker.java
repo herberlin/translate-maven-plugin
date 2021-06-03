@@ -1,5 +1,7 @@
-package de.herberlin.translate;
+package de.herberlin.translate.impl;
 
+import de.herberlin.translate.FileWalker;
+import de.herberlin.translate.Translator;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
 import org.w3c.dom.*;

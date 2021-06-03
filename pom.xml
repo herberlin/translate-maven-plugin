@@ -33,7 +33,6 @@
             <version>4.13</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
@@ -63,8 +62,10 @@
                 <version>1.0.0-SNAPSHOT</version>
                 <configuration>
                     <mode>android</mode>
-                    <source>data/android/values/strings.xml</source>
+                    <source>target/data/android/values/strings.xml</source>
                     <certificate>C:\Users\Hans-Joachim.HERBERT\eclipse\key.boatspeed-translate.json</certificate>
+                    <serviceUrl>https://www.googleapis.com/auth/cloud-platform</serviceUrl>
+                    <translator>dummy</translator>
                     <languages>
                         <language>de</language>
                         <language>ru</language>

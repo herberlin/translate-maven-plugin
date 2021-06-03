@@ -1,6 +1,6 @@
 {
   "common": {
-    "base": "exising",
+    "base": "existing",
     "logbook": "existing",
     "new_entry": "existing",
     "error": "existing"
