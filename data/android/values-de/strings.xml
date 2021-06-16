@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="warning">exiting</string>
-	<string name="service_unavailable">exiting</string>
-	<string name="kph">exiting</string>
+	<string name="warning">existing</string>
+	<string name="service_unavailable">existing</string>
+	<string name="kph">existing</string>
 </resources>

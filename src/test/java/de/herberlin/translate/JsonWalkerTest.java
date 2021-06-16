@@ -40,7 +40,7 @@ public class JsonWalkerTest {
         Assert.assertTrue(ruFile.exists());
         Map<String, Object> map = new Gson().fromJson(new FileReader(ruFile), Map.class);
         Assert.assertEquals("Fails for 'base'", "Basiseintrag-ru", ((Map<String, Object>)map.get("common")).get("base"));
-        Assert.assertEquals("Fails for 'back'", "zurück-ru", ((Map<String, Object>)map.get("entries")).get("back"));
+        Assert.assertEquals("Fails for 'last_entry'", "Letzter Eintrag-ru", ((Map<String, Object>)map.get("entries")).get("last_entry"));
 
 
     }

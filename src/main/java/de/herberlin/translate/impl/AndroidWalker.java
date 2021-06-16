@@ -14,6 +14,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class AndroidWalker implements FileWalker {
@@ -43,6 +44,8 @@ public class AndroidWalker implements FileWalker {
     @Override
     public void translate(String language) throws MojoExecutionException {
         try {
+            String languageDisplayName = getLanguageDisplayName(language);
+            log.info("Translating to: " + language + ", " + languageDisplayName);
             File targetDir = new File(baseDirectory, DIRNAME + language);
             if (!targetDir.exists()) {
                 targetDir.mkdir();
@@ -60,8 +63,9 @@ public class AndroidWalker implements FileWalker {
             if (targetFileIsNew) {
                 targetDoc = builder.newDocument();
                 Element element = targetDoc.createElement("resources");
-
                 targetDoc.appendChild(element);
+                Comment comment = targetDoc.createComment("Language: " + languageDisplayName);
+                element.appendChild(comment);
             } else {
                 targetDoc = builder.parse(targetFile);
             }
@@ -152,5 +156,18 @@ public class AndroidWalker implements FileWalker {
             result.put(nodeName, node);
         }
         return result;
+    }
+
+    private String getLanguageDisplayName(String languageCode) {
+        String s = languageCode;
+        Locale locale = Locale.forLanguageTag(languageCode);
+        if (locale != null) {
+            s = locale.getDisplayLanguage(Locale.ENGLISH);
+            if (s == null || s.length() == 0) {
+                s = languageCode;
+            }
+        }
+        return s;
+
     }
 }

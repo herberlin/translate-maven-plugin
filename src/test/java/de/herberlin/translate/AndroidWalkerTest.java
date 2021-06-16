@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class AndroidWalkerTest {
@@ -55,7 +56,7 @@ public class AndroidWalkerTest {
             if (node.getAttributes().getNamedItem("translatable") == null) {
                 Assert.assertTrue("Key not found: " + key, ruMap.containsKey(key));
                 if (existingItems.contains(key)) {
-                    Assert.assertEquals("Already existing:", "exiting", ruMap.get(key).getTextContent());
+                    Assert.assertEquals("Already existing:", "existing", ruMap.get(key).getTextContent());
                 } else {
                     Assert.assertEquals("No translation:", sourceMap.get(key).getTextContent() + "-de", ruMap.get(key).getTextContent());
                 }
@@ -99,5 +100,17 @@ public class AndroidWalkerTest {
             result.put(nodeName, node);
         }
         return result;
+    }
+
+
+    @Test
+    public void testGetLocaleName() {
+        String[] tags = new String[]{"ru","ceb","zh", "zh-rCN"};
+        for ( String s : tags) {
+            Locale locale = Locale.forLanguageTag(s);
+            System.out.println(locale);
+            System.out.println(locale.getDisplayLanguage(Locale.ENGLISH));
+
+        }
     }
 }
