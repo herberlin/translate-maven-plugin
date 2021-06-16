@@ -1,11 +1,6 @@
 package de.herberlin.translate.impl;
 
-import com.google.api.client.json.JsonParser;
-import com.google.api.client.json.JsonToken;
-import com.google.api.client.json.gson.GsonFactory;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonWriter;
 import de.herberlin.translate.FileWalker;
 import de.herberlin.translate.Translator;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -14,12 +9,10 @@ import org.apache.maven.plugin.logging.Log;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class JsonWalker implements FileWalker {
     private Translator translator;
@@ -63,7 +56,7 @@ public class JsonWalker implements FileWalker {
         }
     }
 
-    private void processMap(Map<String, Object> sourceMap, Map<String, Object> targetMap) {
+    private void processMap(Map<String, Object> sourceMap, Map<String, Object> targetMap) throws MojoExecutionException {
         for (Map.Entry<String, Object> entry : sourceMap.entrySet()) {
             if (entry.getValue() instanceof Map) {
                 Map<String, Object> subMap = (Map) targetMap.get(entry.getKey());
@@ -91,7 +84,7 @@ public class JsonWalker implements FileWalker {
         }
     }
 
-    private void processList(List<String> sourceList, List<String> targetList) {
+    private void processList(List<String> sourceList, List<String> targetList) throws MojoExecutionException {
         for (String s : sourceList) {
             String t = translator.translate(s, language);
             targetList.add(t);

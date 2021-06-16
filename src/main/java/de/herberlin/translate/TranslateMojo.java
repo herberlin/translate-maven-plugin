@@ -64,6 +64,7 @@ public class TranslateMojo extends AbstractMojo {
         Translator trans = null;
         try {
             trans = translator.translator.getDeclaredConstructor().newInstance();
+            trans.setCredentials(certificate, serviceUrl);
         } catch (Exception e) {
             throw new MojoExecutionException("Error creating " + translator.translator, e);
         }

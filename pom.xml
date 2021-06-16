@@ -6,6 +6,19 @@
     <packaging>maven-plugin</packaging>
     <version>1.0.0-SNAPSHOT</version>
     <name>translate-maven-plugin</name>
+    <description>Translate language resources with Google Cloud.</description>
+    <url>https://github.com/herberlin/translate-maven-plugin</url>
+    <inceptionYear>2021</inceptionYear>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <scm>
+        <connection>scm:git:https://github.com/herberlin/translate-maven-plugin</connection>
+        <url>https://github.com/herberlin/translate-maven-plugin</url>
+    </scm>
     <dependencies>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -27,7 +40,7 @@
             <artifactId>gson</artifactId>
             <version>2.8.7</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13</version>
@@ -59,7 +72,7 @@
             <plugin>
                 <groupId>de.herberlin.translate</groupId>
                 <artifactId>translate-maven-plugin</artifactId>
-                <version>1.0.0-SNAPSHOT</version>
+                <version>${project.version}</version>
                 <configuration>
                     <mode>android</mode>
                     <source>target/data/android/values/strings.xml</source>
@@ -76,19 +89,23 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
                 <version>3.6.1</version>
-                <configuration>
-                    <!-- see http://jira.codehaus.org/browse/MNG-5346 -->
-                    <skipErrorNoDescriptorsFound>true</skipErrorNoDescriptorsFound>
-                </configuration>
-                <executions>
+                 <executions>
                     <execution>
-                        <id>mojo-descriptor</id>
+                        <id>default-descriptor</id>
                         <goals>
                             <goal>descriptor</goal>
                         </goals>
+                        <phase>process-classes</phase>
+                    </execution>
+                    <execution>
+                        <id>help-descriptor</id>
+                        <goals>
+                            <goal>helpmojo</goal>
+                        </goals>
+                        <phase>process-classes</phase>
                     </execution>
                 </executions>
-               </plugin>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -99,5 +116,24 @@
             </plugin>
         </plugins>
     </build>
-
+    <prerequisites>
+        <maven>3.0.0</maven>
+    </prerequisites>
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.6.1</version>
+            </plugin>
+        </plugins>
+    </reporting>
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/herberlin/translate-maven-plugin/issues</url>
+    </issueManagement>
+    <organization>
+        <name>None</name>
+        <url>https://herberlin.de</url>
+    </organization>
 </project>

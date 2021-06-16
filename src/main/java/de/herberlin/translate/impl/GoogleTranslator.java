@@ -16,16 +16,19 @@ import java.util.List;
 public class GoogleTranslator implements Translator {
     private Translate translate;
 
-    public void setCredentials(File credentialFile, String serviceUrl) throws IOException, MojoExecutionException {
+    public void setCredentials(File credentialFile, String serviceUrl) throws MojoExecutionException {
 
         if (!credentialFile.canRead()) {
             throw new MojoExecutionException("Can't read certificate: " + credentialFile);
         }
 
-        GoogleCredentials credentials =
-            GoogleCredentials.fromStream(new FileInputStream(credentialFile)).createScoped(serviceUrl);
-        translate = TranslateOptions.newBuilder().setCredentials(credentials).build().getService();
-
+        try {
+            GoogleCredentials credentials =
+                    GoogleCredentials.fromStream(new FileInputStream(credentialFile)).createScoped(serviceUrl);
+            translate = TranslateOptions.newBuilder().setCredentials(credentials).build().getService();
+        }catch (Exception e) {
+            throw new MojoExecutionException("Error creating translator", e);
+        }
     }
 
     /**

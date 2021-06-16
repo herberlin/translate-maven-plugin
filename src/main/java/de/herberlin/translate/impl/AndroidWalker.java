@@ -80,7 +80,7 @@ public class AndroidWalker implements FileWalker {
         }
     }
 
-    private void process(Document source, Document target, String language) {
+    private void process(Document source, Document target, String language) throws MojoExecutionException {
         Map<String, Node> targetNodeMap = createMap(target);
         NodeList sourceNodeList = source.getDocumentElement().getElementsByTagName(STRING_TAG);
         for (int i = 0; i < sourceNodeList.getLength(); i++) {
