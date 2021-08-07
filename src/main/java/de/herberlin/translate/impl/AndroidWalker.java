@@ -8,6 +8,7 @@ import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -16,6 +17,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 
 public class AndroidWalker implements FileWalker {
 
@@ -45,7 +47,6 @@ public class AndroidWalker implements FileWalker {
     public void translate(String language) throws MojoExecutionException {
         try {
             String languageDisplayName = getLanguageDisplayName(language);
-            log.info("Translating to: " + language + ", " + languageDisplayName);
             File targetDir = new File(baseDirectory, DIRNAME + language);
             if (!targetDir.exists()) {
                 targetDir.mkdir();
@@ -55,6 +56,8 @@ public class AndroidWalker implements FileWalker {
             if (!targetFile.exists()) {
                 targetFileIsNew = targetFile.createNewFile();
             }
+            log.info("Translating "  + languageDisplayName + " to: " + targetFile);
+
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -75,6 +78,7 @@ public class AndroidWalker implements FileWalker {
             // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperties(getTransformerOutputProperties(transformer.getOutputProperties()));
             DOMSource source = new DOMSource(targetDoc);
             StreamResult result = new StreamResult(targetFile);
             transformer.transform(source, result);
@@ -82,6 +86,16 @@ public class AndroidWalker implements FileWalker {
             log.error("Error translating to " + language, e);
             throw new MojoExecutionException("Error translating to " + language, e);
         }
+    }
+
+    private Properties getTransformerOutputProperties(Properties props) {
+        if (props == null) {
+            props = new Properties();
+        }
+        props.setProperty(OutputKeys.INDENT, "yes");
+        props.setProperty(OutputKeys.ENCODING,"utf-8");
+        props.setProperty(OutputKeys.STANDALONE,"yes");
+        return props;
     }
 
     private void process(Document source, Document target, String language) throws MojoExecutionException {
@@ -107,9 +121,7 @@ public class AndroidWalker implements FileWalker {
             String translated = sanitize(translator.translate(st.toString(), language));
             targetNode.setTextContent(translated);
             log.debug("Translating: " + st + " -> " + translated);
-
             target.getDocumentElement().appendChild(targetNode);
-
         }
 
     }
@@ -132,7 +144,6 @@ public class AndroidWalker implements FileWalker {
                     result.append("</" + node.getNodeName() + ">");
                     break;
             }
-
         }
     }
 

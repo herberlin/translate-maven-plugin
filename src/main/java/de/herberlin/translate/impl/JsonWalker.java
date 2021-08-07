@@ -1,6 +1,7 @@
 package de.herberlin.translate.impl;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import de.herberlin.translate.FileWalker;
 import de.herberlin.translate.Translator;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -33,7 +34,7 @@ public class JsonWalker implements FileWalker {
     public void translate(String language) throws MojoExecutionException {
         this.language = language;
         try {
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             File targetFile = new File(source.getParentFile(), language + ".json");
             boolean targetFileIsNew = false;
             Map<String, Object> targetMap;
