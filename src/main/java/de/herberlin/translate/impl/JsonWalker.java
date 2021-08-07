@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class JsonWalker implements FileWalker {
+    private static final String PREFIX_UPDATED = "_UPDATED_";
     private Translator translator;
     private File source;
     private Log log;
@@ -34,7 +35,7 @@ public class JsonWalker implements FileWalker {
     public void translate(String language) throws MojoExecutionException {
         this.language = language;
         try {
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
             File targetFile = new File(source.getParentFile(), language + ".json");
             boolean targetFileIsNew = false;
             Map<String, Object> targetMap;
@@ -59,7 +60,9 @@ public class JsonWalker implements FileWalker {
 
     private void processMap(Map<String, Object> sourceMap, Map<String, Object> targetMap) throws MojoExecutionException {
         for (Map.Entry<String, Object> entry : sourceMap.entrySet()) {
-            if (entry.getValue() instanceof Map) {
+            if (entry.getValue() instanceof String) {
+                translateString(targetMap, entry);
+            } else if (entry.getValue() instanceof Map) {
                 Map<String, Object> subMap = (Map) targetMap.get(entry.getKey());
                 if (subMap == null) {
                     subMap = new HashMap<>();
@@ -73,17 +76,28 @@ public class JsonWalker implements FileWalker {
                     targetMap.put(entry.getKey(), targetList);
                 }
                 processList((List) entry.getValue(), targetList);
-            } else {
-                if (targetMap.get(entry.getKey()) == null) {
-                    String translated = translator.translate(entry.getValue().toString(), language);
-                    targetMap.put(entry.getKey(), translated);
-                    log.debug(String.format("Translate %s -> %s", entry.getValue(), translated));
-                } else {
-                    log.debug("Key exists: " + entry.getKey());
-                }
             }
         }
     }
+
+    private void translateString(Map<String, Object> targetMap, Map.Entry<String, Object> entry) throws MojoExecutionException {
+        boolean doTranslate = true;
+        if (targetMap.get(entry.getKey()) == null) {
+            // translate it
+        } else if (entry.getValue() != null && entry.getValue().toString().startsWith(PREFIX_UPDATED)) {
+            log.debug("Updated prefix found for: " + entry.getKey());
+        } else {
+            log.debug("Key exists: " + entry.getKey());
+            doTranslate = false;
+        }
+        if (doTranslate) {
+            String toBeTranslated = entry.getValue().toString().replace(PREFIX_UPDATED, "");
+            String translated = translator.translate(toBeTranslated, language);
+            targetMap.put(entry.getKey(), translated);
+            log.debug(String.format("Translate %s -> %s", entry.getValue(), translated));
+        }
+    }
+
 
     private void processList(List<String> sourceList, List<String> targetList) throws MojoExecutionException {
         for (String s : sourceList) {

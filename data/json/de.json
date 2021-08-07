@@ -5,7 +5,7 @@
     "last_entry": "Letzter Eintrag"
   },
   "common": {
-    "base": "Basiseintrag",
+    "base": "_UPDATED_Basiseintrag",
     "logbook": "Logbook",
     "new_entry": "Neuer Eintrag",
     "error": "Fehler",
