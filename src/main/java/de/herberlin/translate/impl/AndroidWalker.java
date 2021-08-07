@@ -21,6 +21,7 @@ import java.util.Properties;
 
 public class AndroidWalker implements FileWalker {
 
+    private static final String ATTR_UPDATED = "updated";
     private Translator translator;
     private File source;
     private File baseDirectory;
@@ -111,10 +112,16 @@ public class AndroidWalker implements FileWalker {
             }
             Node targetNode = targetNodeMap.get(nodeName);
             if (targetNode != null) {
-                log.debug("Node: " + nodeName + " is already translated.");
-                continue;
+                boolean updated = sourceNode.getAttributes().getNamedItem(ATTR_UPDATED) != null;
+                if (updated) {
+                    log.debug("Node: " + nodeName + " has the updated attribute.");
+                } else {
+                    log.debug("Node: " + nodeName + " is already translated.");
+                    continue;
+                }
+            } else {
+                targetNode = target.createElement(STRING_TAG);
             }
-            targetNode = target.createElement(STRING_TAG);
             setAllAttributes(sourceNode, targetNode);
             StringBuilder st = new StringBuilder();
             writeChildrenAsText(st, sourceNode);
@@ -152,6 +159,10 @@ public class AndroidWalker implements FileWalker {
         NamedNodeMap targetAttribs = targetNode.getAttributes();
         for (int i = 0; i < sourceAttribs.getLength(); i++) {
             Node node = sourceAttribs.item(i);
+            if (ATTR_UPDATED.equals(node.getNodeName())) {
+                // skip the update attribute
+                continue;
+            }
             Attr attr = targetNode.getOwnerDocument().createAttribute(node.getNodeName());
             attr.setValue(node.getNodeValue());
             targetAttribs.setNamedItem(attr);

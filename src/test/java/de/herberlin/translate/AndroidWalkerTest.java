@@ -48,20 +48,21 @@ public class AndroidWalkerTest {
         Assert.assertTrue(deFile.exists());
 
         Document sourceDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(sourceFile);
-        Document ruDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(deFile);
+        Document deDoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(deFile);
         Map<String, Node> sourceMap = createMap(sourceDoc);
-        Map<String, Node> ruMap = createMap(ruDoc);
+        Map<String, Node> deMap = createMap(deDoc);
         for (String key : sourceMap.keySet()) {
             Node node = sourceMap.get(key);
             if (node.getAttributes().getNamedItem("translatable") == null) {
-                Assert.assertTrue("Key not found: " + key, ruMap.containsKey(key));
-                if (existingItems.contains(key)) {
-                    Assert.assertEquals("Already existing:", "existing", ruMap.get(key).getTextContent());
+                boolean updated = node.getAttributes().getNamedItem("updated") != null;
+                Assert.assertTrue("Key not found: " + key, deMap.containsKey(key));
+                if (existingItems.contains(key) && ! updated) {
+                    Assert.assertEquals("Already existing:", "existing", deMap.get(key).getTextContent());
                 } else {
-                    Assert.assertEquals("No translation:", sourceMap.get(key).getTextContent() + "-de", ruMap.get(key).getTextContent());
+                    Assert.assertEquals("No translation:", sourceMap.get(key).getTextContent() + "-de", deMap.get(key).getTextContent());
                 }
             } else {
-                Assert.assertFalse("Must not be here: " + key, ruMap.containsKey(key));
+                Assert.assertFalse("Must not be here: " + key, deMap.containsKey(key));
             }
         }
     }

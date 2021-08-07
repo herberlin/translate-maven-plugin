@@ -14,7 +14,7 @@
     <string name="choose_countdown">Choose Countdown Time</string>
     <string name="minutes">Minutes</string>
     <string name="seconds">Seconds</string>
-    <string name="warning">Warning</string>
+    <string updated="true" name="warning">Urgent Warning</string>
     <string name="service_unavailable">Service unavailable</string>
     <string name="kph">kph</string>
     <string name="title_regatta">Countdown</string>
