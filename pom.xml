@@ -15,6 +15,16 @@
             <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
+    <developers>
+        <developer>
+            <id>herberlin</id>
+            <name>Hans Joachim Herbertz</name>
+            <email>herberlin@nexgo.de</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
     <scm>
         <connection>scm:git:https://github.com/herberlin/translate-maven-plugin</connection>
         <url>https://github.com/herberlin/translate-maven-plugin</url>
@@ -223,7 +233,7 @@
                                     <goal>sign</goal>
                                 </goals>
                                 <configuration>
-                                    <keyname>${gpg.passphrase}</keyname>
+                                    <keyname>5C045F073A96AB14580F6DF7338FF568DFB33A68</keyname>
                                     <passphraseServerId>${gpg.passphrase}</passphraseServerId>
                                 </configuration>
                             </execution>

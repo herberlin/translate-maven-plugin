@@ -1,0 +1,9 @@
+
+For a non snapshot release run:
+
+    mvn clean deploy -DperformRelease=true
+
+to generate the gpg signature files (.asc).
+
+
+For SNAPSHOT mvn clean deploy is enough.
