@@ -4,7 +4,6 @@ import de.herberlin.translate.impl.AndroidWalker;
 import de.herberlin.translate.impl.DummyTranslator;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,7 +26,7 @@ import java.util.Map;
 public class AndroidWalkerTest {
     Translator translator = new DummyTranslator();
     File source = new File("target/data/android/values/strings.xml");
-    Log log = new SystemStreamLog();
+    Log log = new Log.MavenLogger(new SystemStreamLog());
 
     @Before
     public void setUp() throws IOException {

@@ -3,9 +3,9 @@ package de.herberlin.translate.impl;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.herberlin.translate.FileWalker;
+import de.herberlin.translate.Log;
 import de.herberlin.translate.Translator;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 
 import java.io.File;
 import java.io.FileReader;

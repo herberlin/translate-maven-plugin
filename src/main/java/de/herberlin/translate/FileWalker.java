@@ -1,10 +1,8 @@
 package de.herberlin.translate;
 
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 /**
  * Implementing classes walk through the filesystem, locate resources files
@@ -18,7 +16,7 @@ public interface FileWalker {
      * @param translator Translator, either google or dummy
      * @param source source file
      * @param log Logger
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException MojoExecutionException
      */
     void init(Translator translator, File source, Log log) throws MojoExecutionException;
 

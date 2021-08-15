@@ -3,7 +3,6 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
-        google()
         maven {
             url 'https://maven.google.com/'
         }
@@ -18,4 +17,10 @@ buildscript {
 apply plugin: 'de.herberlin.translate'
 translate {
     mode="android"
+    translator = "dummy"
+    source = "data/android/values/strings.xml"
+    certificate = "/home/aherbertz/Dokumente/goolge/my-google-translate-key.json"
+    serviceUrl = "https://www.googleapis.com/auth/cloud-platform"
+    languages = ["de", "ru"]
+
 }

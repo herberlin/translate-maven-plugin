@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface Translator {
 
-    /**
+    /**String
      * Initialization.
      * @param credentialFile Credential file
      * @param serviceUrl Service URL.

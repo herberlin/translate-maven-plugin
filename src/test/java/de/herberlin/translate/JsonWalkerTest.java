@@ -5,7 +5,6 @@ import de.herberlin.translate.impl.DummyTranslator;
 import de.herberlin.translate.impl.JsonWalker;
 import org.apache.commons.io.FileUtils;
 import org.apache.maven.plugin.MojoExecutionException;
-import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugin.logging.SystemStreamLog;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -21,7 +20,7 @@ public class JsonWalkerTest {
 
     Translator translator = new DummyTranslator();
     File source = new File("target/data/json/de.json");
-    Log log = new SystemStreamLog();
+    Log log = new Log.MavenLogger(new SystemStreamLog());
 
     @BeforeClass
     public static void setUp() throws IOException {

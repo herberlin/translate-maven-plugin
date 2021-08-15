@@ -84,7 +84,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: commons-io:commons-io:2.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.gradle:gradle-tooling-api:3.0" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-api:1.7.10" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gradle:gradle-core:3.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gradle:gradle-base-services:3.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gradle:gradle-base-services-groovy:3.0" level="project" />
@@ -98,5 +97,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gradle:gradle-logging:3.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.gradle:gradle-resources:3.0" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.groovy:groovy:3.0.8" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.32" level="project" />
   </component>
 </module>
