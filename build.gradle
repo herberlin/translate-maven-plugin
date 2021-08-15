@@ -1,0 +1,21 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+        maven {
+            url 'https://maven.google.com/'
+        }
+    }
+
+    dependencies {
+         classpath  'de.herberlin.translate:translate-maven-plugin:1.1.0-SNAPSHOT'
+    }
+}
+
+// run:  mvn clean install && ./gradlew translate
+apply plugin: 'de.herberlin.translate'
+translate {
+    mode="android"
+}
