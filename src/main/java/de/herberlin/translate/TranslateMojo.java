@@ -13,9 +13,15 @@ import org.apache.maven.plugins.annotations.Parameter;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Maven plugin interface.
+ */
 @Mojo(name = "translate")
 public class TranslateMojo extends AbstractMojo {
 
+    /**
+     * Possible translation modes.
+     */
     private enum Mode {
         android(AndroidWalker.class),
         properties(PropertiesWalker.class),
@@ -28,6 +34,10 @@ public class TranslateMojo extends AbstractMojo {
         private Class<? extends FileWalker> executor = null;
     }
 
+    /**
+     * Possible translator implementations,
+     * currently Google and Dummy
+     */
     private enum TranslatorImplementation {
         google(GoogleTranslator.class), dummy(DummyTranslator.class);
 
@@ -38,17 +48,41 @@ public class TranslateMojo extends AbstractMojo {
     }
 
 
+    /**
+     * Maven configuration parameter mode,
+     * possible values android, json, default: andorid
+     */
     @Parameter(defaultValue = "android") private Mode mode;
+    /**
+     * Maven configuration parameter translator,
+     * possible values google, dummy.
+     */
     @Parameter(defaultValue = "google") private TranslatorImplementation translator;
 
+    /**
+     * Maven configuration parameter source file.
+     */
     @Parameter(required = true) private File source;
 
+    /**
+     * Maven configuration parameter certificate location.
+     */
     @Parameter(required = true) private File certificate;
 
+    /**
+     * Maven configuration parameter serviceUrl, defaults to goocle cloud.
+     */
     @Parameter(defaultValue = "https://www.googleapis.com/auth/cloud-platform") private String serviceUrl;
 
+    /**
+     * Configured target languages.
+     */
     @Parameter(required = true) private List<String> languages;
 
+    /**
+     * Plugin entrypoint.
+     * @throws MojoExecutionException
+     */
     public void execute() throws MojoExecutionException {
 
         if (!source.canRead()) {

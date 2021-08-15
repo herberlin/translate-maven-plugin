@@ -7,6 +7,9 @@ import org.apache.maven.plugin.logging.Log;
 
 import java.io.File;
 
+/**
+ * TODO: Walker implementation for java properties.
+ */
 public class PropertiesWalker implements FileWalker {
     @Override
     public void init(Translator translator, File source, Log log) throws MojoExecutionException {

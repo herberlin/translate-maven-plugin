@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Translator implementation for Google - Cloud.
+ */
 public class GoogleTranslator implements Translator {
     private Translate translate;
 

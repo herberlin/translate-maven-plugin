@@ -15,6 +15,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Walker implementation for Json.
+ */
 public class JsonWalker implements FileWalker {
     private static final String PREFIX_UPDATED = "_UPDATED_";
     private Translator translator;

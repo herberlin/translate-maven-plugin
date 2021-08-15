@@ -19,6 +19,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * Walker implementation for Android.
+ */
 public class AndroidWalker implements FileWalker {
 
     private static final String ATTR_UPDATED = "updated";

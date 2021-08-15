@@ -7,6 +7,10 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Dummy translator implementation for testing.
+ * Just adds the language code to the text to be translated.
+ */
 public class DummyTranslator implements Translator {
     @Override
     public String translate(String text, String languageCode) {
