@@ -26,11 +26,10 @@ public class JsonWalker implements FileWalker {
     private String language = null;
 
     @Override
-    public void init(Translator translator, File source, Log log) throws MojoExecutionException {
+    public void init(Translator translator, File source, Log log)  {
         this.log = log;
         this.source = source;
         this.translator = translator;
-
     }
 
 
@@ -40,10 +39,9 @@ public class JsonWalker implements FileWalker {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
             File targetFile = new File(source.getParentFile(), language + ".json");
-            boolean targetFileIsNew = false;
             Map<String, Object> targetMap;
             if (!targetFile.exists()) {
-                targetFileIsNew = targetFile.createNewFile();
+                targetFile.createNewFile();
                 targetMap = new HashMap<>();
 
             } else {
@@ -85,7 +83,10 @@ public class JsonWalker implements FileWalker {
 
     private void translateString(Map<String, Object> targetMap, Map.Entry<String, Object> entry) throws MojoExecutionException {
         boolean doTranslate = true;
-        if (targetMap.get(entry.getKey()) == null) {
+        if (entry.getKey().startsWith("@")) {
+            // skip keys staring with @
+            doTranslate = false;
+        } else if (targetMap.get(entry.getKey()) == null) {
             // translate it
         } else if (entry.getValue() != null && entry.getValue().toString().startsWith(PREFIX_UPDATED)) {
             log.debug("Updated prefix found for: " + entry.getKey());

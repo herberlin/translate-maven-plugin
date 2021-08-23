@@ -13,6 +13,7 @@
     "na": "Keine Angabe",
     "quantity": "(Menge)",
     "toolbar_close_text": "Wählen",
+    "@ignore_me" : "Wird ausgelassen",
     "speedunit": {
       "kn": "Kn",
       "kmh": "Km/h",

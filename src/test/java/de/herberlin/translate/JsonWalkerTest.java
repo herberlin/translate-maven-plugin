@@ -54,4 +54,15 @@ public class JsonWalkerTest {
         Assert.assertEquals("Fails for updated 'base'", "Basiseintrag-en", ((Map<String, Object>)map.get("common")).get("base"));
         Assert.assertEquals("Fails for 'last_entry'", "Letzter Eintrag-en", ((Map<String, Object>)map.get("entries")).get("last_entry"));
     }
+
+    @Test
+    public void testIgnore() throws MojoExecutionException, FileNotFoundException {
+        File enFile = new File("target/data/json/en.json");
+        JsonWalker testObj = new JsonWalker();
+        testObj.init(translator, source, log);
+        testObj.translate("en");
+        Assert.assertTrue(enFile.exists());
+        Map<String, Object> map = new Gson().fromJson(new FileReader(enFile), Map.class);
+        Assert.assertNull("Should ignore '@ignore_me'", ((Map<String, Object>)map.get("common")).get("@ignore_me"));
+    }
 }
