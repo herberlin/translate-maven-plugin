@@ -7,6 +7,8 @@ using the Google Translate Cloud service. A Google api key is required.
 Google Cloud Translate is a payed service. See https://cloud.google.com/translate/docs/setup
 how to obtain an api-key and enable billing. 
 
+The plugin also works with gradle, see below. 
+
 Choose your source language file and configure the target languages you 
 need. The plugin creates the necessary files and inserts the translated
 phrases. Already existing translations are not touched, missing translations
@@ -36,8 +38,8 @@ Inside the file we support the following:
         <string updated="true" name="warning">Urgent Warning</string>
     </resources>
 
-- The `translatable="false"` attribute is supportes (android-standard).
-- The `<xliff:g>`-Tag is supported (android-standard).
+- The `translatable="false"` attribute is supportes (android-standard). These entries are not translated.
+- The `<xliff:g>`-Tag is supported (android-standard). Content between these tags is not translated. 
 - It's also possible to force re-translation when you change an
   expression and don't want to change the key. Use: `updated="true"` and remove the attribute after translation. 
 
@@ -59,17 +61,24 @@ Inside the json - file the hierarchy is respected.
     { 
         "common": {
             "base": "_UPDATED_baseentry",
-            "unchanged" : "unchanged"
+            "unchanged" : "unchanged",
+            "@ignored" : "ignored"
         }
     }
 
 The keyword `_UPDATED_` at the start of the value (not the key) indicates
 that a value was changed and should be re-translated. Remove it manually afterwords. 
 
+Otherwise existing translations are not touched.
+
+Keys starting with an ampersat '@' are ignored and not translated. 
+
 ### Java property - files
 Implementation missing.
 
 ## Configuration
+
+### Maven
 
     <project>
     <build>
@@ -115,6 +124,44 @@ Implementation missing.
         </plugins>
     </build>
     </project>
+
+## Gradle
+
+        buildscript {
+            repositories {
+                mavenCentral()
+                [..]
+            }
+            dependencies {
+                // add the dependency
+                classpath 'de.herberlin.translate:translate-maven-plugin:1.1.0'
+            }
+        }
+        
+        // run:  ./gradlew translate
+        apply plugin: 'de.herberlin.translate'
+
+        // configuration
+        translate {
+            
+            // modes: android, json, properties
+            mode = "android"
+
+            // google or dummy for testing
+            translator = "google"
+
+            // google service url
+            serviceUrl = "https://www.googleapis.com/auth/cloud-platform"
+
+            // path to your google cloud certificate, see above
+            certificate = "/home/aherbertz/Dokumente/goolge/my-google-translate-key.json"
+
+            // location of your soure files
+            source = "data/android/values/strings.xml"
+
+            // an array of target languages
+            languages = ["de", "ru"]
+        }
 
 ## License 
 Apache 2 
