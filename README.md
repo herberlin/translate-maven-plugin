@@ -167,6 +167,19 @@ Implementation missing.
 Apache 2 
 http://www.apache.org/licenses/LICENSE-2.0
 
+## Versions
+### TODO
+- Java property-files support.
+- Flutter arb files support (you may use json and rename the files manually).
+
+### 1.0.0
+- Google cloud translate
+- Maven
+
+### 1.1.0 
+- Translate with gradle.
+- Use @ to ignore keys in json.
+
 
 
 
