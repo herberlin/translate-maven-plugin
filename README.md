@@ -130,7 +130,10 @@ Implementation missing.
         buildscript {
             repositories {
                 mavenCentral()
-                [..]
+                maven {
+                    // If you want to use snapshots this is the the sonatype snapshot repo
+                    url 'https://s01.oss.sonatype.org/content/repositories/snapshots'
+                }                
             }
             dependencies {
                 // add the dependency
