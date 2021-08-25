@@ -183,6 +183,9 @@ http://www.apache.org/licenses/LICENSE-2.0
 - Translate with gradle.
 - Use @ to ignore keys in json.
 
+### 1.1.1
+- Fix issue "Could not find org.gradle:gradle-tooling-api"
+
 
 
 
