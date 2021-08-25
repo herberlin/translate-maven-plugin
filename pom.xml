@@ -4,7 +4,7 @@
     <groupId>de.herberlin.translate</groupId>
     <artifactId>translate-maven-plugin</artifactId>
     <packaging>maven-plugin</packaging>
-    <version>1.1.0</version>
+    <version>1.1.1</version>
     <name>translate-maven-plugin</name>
     <description>Translate language resources with Google Cloud.</description>
     <url>https://github.com/herberlin/translate-maven-plugin</url>
@@ -68,6 +68,7 @@
             <groupId>org.gradle</groupId>
             <artifactId>gradle-tooling-api</artifactId>
             <version>3.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.gradle</groupId>
@@ -80,12 +81,14 @@
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy</artifactId>
             <version>3.0.8</version>
+            <scope>provided</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.32</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
