@@ -38,8 +38,10 @@ public class GoogleTranslator implements Translator {
      */
     @Override
     public String translate(String text, String languageCode) {
-        return translate.translate(text, Translate.TranslateOption.targetLanguage(languageCode),
+        String result =  translate.translate(text, Translate.TranslateOption.targetLanguage(languageCode),
             Translate.TranslateOption.model("nmt")).getTranslatedText();
+
+        return PostprocessUtil.process(text, result);
     }
 
     @Override
