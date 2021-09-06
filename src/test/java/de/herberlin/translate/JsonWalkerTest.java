@@ -63,6 +63,7 @@ public class JsonWalkerTest {
         testObj.translate("en");
         Assert.assertTrue(enFile.exists());
         Map<String, Object> map = new Gson().fromJson(new FileReader(enFile), Map.class);
-        Assert.assertNull("Should ignore '@ignore_me'", ((Map<String, Object>)map.get("common")).get("@ignore_me"));
+        Assert.assertNotNull("Should not be ignored '@ignore_me'", ((Map<String, Object>)map.get("common")).get("@ignore_me"));
+        Assert.assertEquals("Should keep value unchanged '@ignore_me'", ((Map<String, Object>)map.get("common")).get("@ignore_me"), "Wird ausgelassen");
     }
 }

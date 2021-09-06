@@ -84,7 +84,9 @@ public class JsonWalker implements FileWalker {
     private void translateString(Map<String, Object> targetMap, Map.Entry<String, Object> entry) throws MojoExecutionException {
         boolean doTranslate = true;
         if (entry.getKey().startsWith("@")) {
-            // skip keys staring with @
+            // keep values starting with @
+            targetMap.put(entry.getKey(), entry.getValue());
+            log.debug(String.format("Keeping %s -> %s", entry.getValue(), entry.getValue()));
             doTranslate = false;
         } else if (targetMap.get(entry.getKey()) == null) {
             // translate it
