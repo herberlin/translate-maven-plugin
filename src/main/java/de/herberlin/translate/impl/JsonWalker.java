@@ -75,8 +75,8 @@ public class JsonWalker implements FileWalker {
                 if (targetList == null) {
                     targetList = new LinkedList<>();
                     targetMap.put(entry.getKey(), targetList);
+                    processList((List) entry.getValue(), targetList);
                 }
-                processList((List) entry.getValue(), targetList);
             }
         }
     }

@@ -26,7 +26,7 @@
       "m": "m"
     },
     "temperatureunit": [
-      "C", "F"
+      "C", "F","A","B"
     ],
      "no_boat": "Unbekanntes Schiff"
   }
