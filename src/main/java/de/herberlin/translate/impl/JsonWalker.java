@@ -39,6 +39,7 @@ public class JsonWalker implements FileWalker {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
             File targetFile = new File(source.getParentFile(), language + ".json");
+            log.info("Translating to: " + targetFile.getName());
             Map<String, Object> targetMap;
             if (!targetFile.exists()) {
                 targetFile.createNewFile();
