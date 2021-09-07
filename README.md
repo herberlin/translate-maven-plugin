@@ -172,8 +172,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 ## Versions
 
-Latest stable version is 1.1.1.
-Latest snapshot is 1.1.2-SNAPSHOT.
+Latest stable version is 1.1.2.
 
 ### TODO
 - Java property-files support.
@@ -193,6 +192,7 @@ Latest snapshot is 1.1.2-SNAPSHOT.
 ### 1.1.2
 - Uppercase first letter of the translated text if source is uppercase.
 - JSON: Copy values of @key keys unchanged instead of ignoring them.
+- Bugfix with json arrays.
 
 
 
