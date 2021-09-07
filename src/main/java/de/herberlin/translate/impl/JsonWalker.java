@@ -39,6 +39,7 @@ public class JsonWalker implements FileWalker {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().setLenient().create();
             File targetFile = new File(source.getParentFile(), language + ".json");
+            log.info("Translating to: " + targetFile.getName());
             Map<String, Object> targetMap;
             if (!targetFile.exists()) {
                 targetFile.createNewFile();
@@ -75,8 +76,8 @@ public class JsonWalker implements FileWalker {
                 if (targetList == null) {
                     targetList = new LinkedList<>();
                     targetMap.put(entry.getKey(), targetList);
+                    processList((List) entry.getValue(), targetList);
                 }
-                processList((List) entry.getValue(), targetList);
             }
         }
     }
@@ -84,7 +85,9 @@ public class JsonWalker implements FileWalker {
     private void translateString(Map<String, Object> targetMap, Map.Entry<String, Object> entry) throws MojoExecutionException {
         boolean doTranslate = true;
         if (entry.getKey().startsWith("@")) {
-            // skip keys staring with @
+            // keep values starting with @
+            targetMap.put(entry.getKey(), entry.getValue());
+            log.debug(String.format("Keeping %s -> %s", entry.getValue(), entry.getValue()));
             doTranslate = false;
         } else if (targetMap.get(entry.getKey()) == null) {
             // translate it

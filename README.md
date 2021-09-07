@@ -87,7 +87,7 @@ Implementation missing.
                 <groupId>de.herberlin.translate</groupId>
                 <artifactId>translate-maven-plugin</artifactId>
                 <!-- plugin version here -->
-                <version>1.0.0</version>
+                <version>1.X.X</version>
                 <configuration>
 
                     <!-- android or json -->
@@ -137,7 +137,7 @@ Implementation missing.
             }
             dependencies {
                 // add the dependency
-                classpath 'de.herberlin.translate:translate-maven-plugin:1.1.0'
+                classpath 'de.herberlin.translate:translate-maven-plugin:1.X.X'
             }
         }
         
@@ -171,6 +171,10 @@ Apache 2
 http://www.apache.org/licenses/LICENSE-2.0
 
 ## Versions
+
+Latest stable version is 1.1.1.
+Latest snapshot is 1.1.2-SNAPSHOT.
+
 ### TODO
 - Java property-files support.
 - Flutter arb files support (you may use json and rename the files manually).
@@ -185,6 +189,10 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 ### 1.1.1
 - Fix issue "Could not find org.gradle:gradle-tooling-api"
+
+### 1.1.2
+- Uppercase first letter of the translated text if source is uppercase.
+- JSON: Copy values of @key keys unchanged instead of ignoring them.
 
 
 

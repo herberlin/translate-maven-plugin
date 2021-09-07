@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-         classpath  'de.herberlin.translate:translate-maven-plugin:1.1.0-SNAPSHOT'
+         classpath  'de.herberlin.translate:translate-maven-plugin:1.1.2-SNAPSHOT'
     }
 }
 

@@ -14,7 +14,8 @@ import java.util.List;
 public class DummyTranslator implements Translator {
     @Override
     public String translate(String text, String languageCode) {
-        return text + "-" + languageCode;
+        String result =  text + "-" + languageCode;
+        return PostprocessUtil.process(text, result);
     }
 
     @Override
