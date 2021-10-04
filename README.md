@@ -195,6 +195,8 @@ Latest snapshot is 1.1.3-SNAPSHOT.
 - JSON: Copy values of @key keys unchanged instead of ignoring them.
 
 ### 1.1.3
+- Remove the _UPDATED_ flag for not translatable entires
+- Remove key without '@' for @key entries.
 
 
 
