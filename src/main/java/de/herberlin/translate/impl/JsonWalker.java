@@ -86,7 +86,12 @@ public class JsonWalker implements FileWalker {
         boolean doTranslate = true;
         if (entry.getKey().startsWith("@")) {
             // keep values starting with @
-            targetMap.put(entry.getKey(), entry.getValue());
+            String value = entry.getValue().toString();
+            if (value != null) {
+                value = value.replace(PREFIX_UPDATED, "");
+            }
+            targetMap.put(entry.getKey(), value);
+            targetMap.remove(entry.getKey().replace("@",""));
             log.debug(String.format("Keeping %s -> %s", entry.getValue(), entry.getValue()));
             doTranslate = false;
         } else if (targetMap.get(entry.getKey()) == null) {
