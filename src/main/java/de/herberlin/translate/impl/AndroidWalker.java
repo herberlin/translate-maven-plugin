@@ -99,6 +99,7 @@ public class AndroidWalker implements FileWalker {
         props.setProperty(OutputKeys.INDENT, "yes");
         props.setProperty(OutputKeys.ENCODING,"utf-8");
         props.setProperty(OutputKeys.STANDALONE,"yes");
+        props.setProperty(OutputKeys.METHOD,"xml");
         return props;
     }
 
@@ -177,10 +178,20 @@ public class AndroidWalker implements FileWalker {
         NodeList list = target.getElementsByTagName(STRING_TAG);
         for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
+            trimNodeContent(node.getNextSibling());
+            trimNodeContent(node.getPreviousSibling());
             String nodeName = node.getAttributes().getNamedItem("name").getNodeValue();
             result.put(nodeName, node);
         }
         return result;
+    }
+    private void trimNodeContent(Node node) {
+        if (node != null) {
+            String s = node.getTextContent();
+            if (s != null) {
+                node.setTextContent(s.trim());
+            }
+        }
     }
 
     private String getLanguageDisplayName(String languageCode) {
