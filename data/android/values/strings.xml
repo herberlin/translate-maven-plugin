@@ -2,7 +2,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="anchor_alert_running">Anchor alert at<xliff:g> %1$s </xliff:g>of<xliff:g> %2$s </xliff:g>m.</string>
     <string name="start_position">Anchor</string>
-    <string name="current_position">Position</string>
+    <string name="_position">Position</string>
     <string name="target_distance">Distance</string>
     <string name="change">Change</string>
     <string name="anchor_alert_running">Anchor alert at<xliff:g> %1$s </xliff:g>of<xliff:g> %2$s </xliff:g>m.</string>
@@ -20,6 +20,7 @@
     <string name="title_regatta">Countdown</string>
     <string name="mob_position">Mob Position</string>
     <string name="lat" translatable="false">Lat</string>
+    <string name="remove_existing" translatable="false" updated="true">Remove Existing</string>
     <string name="my_position">My Position</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>

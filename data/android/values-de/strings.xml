@@ -3,4 +3,5 @@
 	<string name="warning">existing</string>
 	<string name="service_unavailable">existing</string>
 	<string name="kph">existing</string>
+	<string name="remove_existing">Remove Existing</string>
 </resources>
