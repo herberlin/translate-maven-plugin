@@ -174,8 +174,8 @@ http://www.apache.org/licenses/LICENSE-2.0
 
 ## Versions
 
-Latest stable version is 1.1.2.
-Latest snapshot is 1.1.3-SNAPSHOT.
+Latest stable version is 1.1.4.
+Latest snapshot is 1.1.5-SNAPSHOT.
 
 ### TODO
 - Java property-files support.
