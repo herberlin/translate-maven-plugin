@@ -24,7 +24,8 @@ import java.util.Properties;
  */
 public class AndroidWalker implements FileWalker {
 
-    private static final String ATTR_UPDATED = "updated";
+    public static final String ATTR_UPDATED = "updated";
+    public static final String TRANSLATABLE = "translatable";
     private Translator translator;
     private File source;
     private File baseDirectory;
@@ -60,7 +61,7 @@ public class AndroidWalker implements FileWalker {
             if (!targetFile.exists()) {
                 targetFileIsNew = targetFile.createNewFile();
             }
-            log.info("Translating "  + languageDisplayName + " to: " + targetFile);
+            log.info("Translating " + languageDisplayName + " to: " + targetFile);
 
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             factory.setNamespaceAware(true);
@@ -97,8 +98,9 @@ public class AndroidWalker implements FileWalker {
             props = new Properties();
         }
         props.setProperty(OutputKeys.INDENT, "yes");
-        props.setProperty(OutputKeys.ENCODING,"utf-8");
-        props.setProperty(OutputKeys.STANDALONE,"yes");
+        props.setProperty(OutputKeys.ENCODING, "utf-8");
+        props.setProperty(OutputKeys.STANDALONE, "yes");
+        props.setProperty(OutputKeys.METHOD, "xml");
         return props;
     }
 
@@ -108,21 +110,31 @@ public class AndroidWalker implements FileWalker {
         for (int i = 0; i < sourceNodeList.getLength(); i++) {
             Node sourceNode = sourceNodeList.item(i);
             String nodeName = sourceNode.getAttributes().getNamedItem("name").getNodeValue();
-            Node translatableNode = sourceNode.getAttributes().getNamedItem("translatable");
-            if (translatableNode != null && "false".equals(translatableNode.getNodeValue())) {
-                log.debug("Node: " + nodeName + " not translatable");
-                continue;
-            }
+            Node translateAttribute = sourceNode.getAttributes().getNamedItem(TRANSLATABLE);
+            boolean doNotTranslate = translateAttribute != null && "false".equals(translateAttribute.getNodeValue());
+            Node updateAttribute = sourceNode.getAttributes().getNamedItem(ATTR_UPDATED);
+            boolean doUpdate = updateAttribute != null && "true".equals(updateAttribute.getNodeValue());
+
             Node targetNode = targetNodeMap.get(nodeName);
             if (targetNode != null) {
-                boolean updated = sourceNode.getAttributes().getNamedItem(ATTR_UPDATED) != null;
-                if (updated) {
+                if (doNotTranslate && doUpdate) {
+                    try {
+                        target.getFirstChild().removeChild(targetNode);
+                        log.debug("Node: " + nodeName + " is to be removed.");
+                    } catch (Exception e) {
+                        log.error("Could not remove: " + nodeName, e);
+                    }
+                    continue;
+                } else if (doUpdate) {
                     log.debug("Node: " + nodeName + " has the updated attribute.");
                 } else {
                     log.debug("Node: " + nodeName + " is already translated.");
                     continue;
                 }
             } else {
+                if (doNotTranslate) {
+                    continue;
+                }
                 targetNode = target.createElement(STRING_TAG);
             }
             setAllAttributes(sourceNode, targetNode);
@@ -177,10 +189,21 @@ public class AndroidWalker implements FileWalker {
         NodeList list = target.getElementsByTagName(STRING_TAG);
         for (int i = 0; i < list.getLength(); i++) {
             Node node = list.item(i);
+            trimNodeContent(node.getNextSibling());
+            trimNodeContent(node.getPreviousSibling());
             String nodeName = node.getAttributes().getNamedItem("name").getNodeValue();
             result.put(nodeName, node);
         }
         return result;
+    }
+
+    private void trimNodeContent(Node node) {
+        if (node != null) {
+            String s = node.getTextContent();
+            if (s != null) {
+                node.setTextContent(s.trim());
+            }
+        }
     }
 
     private String getLanguageDisplayName(String languageCode) {

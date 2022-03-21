@@ -55,7 +55,7 @@ public class TranslateMojo extends AbstractMojo {
     /**
      * Plugin entrypoint.
      *
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException in case of error
      */
     public void execute() throws MojoExecutionException {
         Log log = new Log.MavenLogger(getLog());

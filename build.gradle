@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-         classpath  'de.herberlin.translate:translate-maven-plugin:1.1.2-SNAPSHOT'
+         classpath  'de.herberlin.translate:translate-maven-plugin:1.1.4-SNAPSHOT'
     }
 }
 
@@ -18,7 +18,7 @@ apply plugin: 'de.herberlin.translate'
 translate {
     mode="android"
     translator = "dummy"
-    source = "data/android/values/strings.xml"
+    source = "${projectDir}/data/android/values/strings.xml"
     certificate = "/home/aherbertz/Dokumente/goolge/my-google-translate-key.json"
     serviceUrl = "https://www.googleapis.com/auth/cloud-platform"
     languages = ["de", "ru"]

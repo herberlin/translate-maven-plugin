@@ -36,12 +36,14 @@ Inside the file we support the following:
         <string name="start" translatable="false">start</string>
         <string name="anchor_alert_running">Anchor alert at<xliff:g> %1$s </xliff:g>of<xliff:g> %2$s </xliff:g>m.</string>
         <string updated="true" name="warning">Urgent Warning</string>
+        <string updated="true" translatable="false" name="warning">Urgent Warning</string>
     </resources>
 
 - The `translatable="false"` attribute is supportes (android-standard). These entries are not translated.
 - The `<xliff:g>`-Tag is supported (android-standard). Content between these tags is not translated. 
 - It's also possible to force re-translation when you change an
   expression and don't want to change the key. Use: `updated="true"` and remove the attribute after translation. 
+- If you specify `updated="true"` and translatable="false"` existing translations are removed. 
 
 ### Json - language resources
 
@@ -160,7 +162,7 @@ Implementation missing.
             certificate = "/home/aherbertz/Dokumente/goolge/my-google-translate-key.json"
 
             // location of your soure files
-            source = "data/android/values/strings.xml"
+            source = "${projectDir}/data/android/values/strings.xml"
 
             // an array of target languages
             languages = ["de", "ru"]
@@ -197,6 +199,11 @@ Latest snapshot is 1.1.3-SNAPSHOT.
 ### 1.1.3
 - Remove the _UPDATED_ flag for not translatable entires
 - Remove key without '@' for @key entries.
+
+### 1.1.4
+- Library update for gradle. 
+- Bugfix too much whitespaces and empty lines in xml.
+- Feature: Delete existing translation when updated=true && translatable=false
 
 
 

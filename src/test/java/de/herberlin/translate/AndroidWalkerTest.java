@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import static de.herberlin.translate.impl.AndroidWalker.ATTR_UPDATED;
+import static de.herberlin.translate.impl.AndroidWalker.TRANSLATABLE;
+
 public class AndroidWalkerTest {
     Translator translator = new DummyTranslator();
     File source = new File("target/data/android/values/strings.xml");
@@ -52,8 +55,8 @@ public class AndroidWalkerTest {
         Map<String, Node> deMap = createMap(deDoc);
         for (String key : sourceMap.keySet()) {
             Node node = sourceMap.get(key);
-            if (node.getAttributes().getNamedItem("translatable") == null) {
-                boolean updated = node.getAttributes().getNamedItem("updated") != null;
+            if (node.getAttributes().getNamedItem(TRANSLATABLE) == null) {
+                boolean updated = node.getAttributes().getNamedItem(ATTR_UPDATED) != null;
                 Assert.assertTrue("Key not found: " + key, deMap.containsKey(key));
                 if (existingItems.contains(key) && ! updated) {
                     Assert.assertEquals("Already existing:", "existing", deMap.get(key).getTextContent());
@@ -81,7 +84,7 @@ public class AndroidWalkerTest {
         Map<String, Node> ruMap = createMap(ruDoc);
         for (String key : sourceMap.keySet()) {
             Node node = sourceMap.get(key);
-            if (node.getAttributes().getNamedItem("translatable") == null) {
+            if (node.getAttributes().getNamedItem(TRANSLATABLE) == null) {
                 Assert.assertTrue("Key not found: " + key, ruMap.containsKey(key));
                 Assert.assertEquals("No translation:", sourceMap.get(key).getTextContent() + "-ru", ruMap.get(key).getTextContent());
             } else {
