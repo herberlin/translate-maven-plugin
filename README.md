@@ -162,7 +162,7 @@ Implementation missing.
             certificate = "/home/aherbertz/Dokumente/goolge/my-google-translate-key.json"
 
             // location of your soure files
-            source = "data/android/values/strings.xml"
+            source = "${projectDir}/data/android/values/strings.xml"
 
             // an array of target languages
             languages = ["de", "ru"]
@@ -203,6 +203,7 @@ Latest snapshot is 1.1.3-SNAPSHOT.
 ### 1.1.4
 - Library update for gradle. 
 - Bugfix too much whitespaces and empty lines in xml.
+- Feature: Delete existing translation when updated=true && translatable=false
 
 
 
