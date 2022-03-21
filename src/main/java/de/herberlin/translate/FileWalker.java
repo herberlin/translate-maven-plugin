@@ -24,7 +24,7 @@ public interface FileWalker {
      * Parses the in init(..) given source file into a target language and writes the result
      * to the filesystem.
      * @param language two letter language code.
-     * @throws MojoExecutionException
+     * @throws MojoExecutionException in case of error.
      */
     void translate(String language) throws MojoExecutionException;
 }
