@@ -172,6 +172,19 @@ Implementation missing.
 Apache 2 
 http://www.apache.org/licenses/LICENSE-2.0
 
+## Known Limitations
+### Android Studio
+```
+java.lang.NoSuchMethodError: 'java.util.stream.Collector com.google.common.collect.ImmutableSet.toImmutableSet()'
+``` 
+Adding the translate dependencies to the Android Studio main build.gradle this error 
+may occur. Looks like Android Studio uses different dependencies, at the console the 
+build works fine. 
+
+In case of this error you may use a separate buildfile for the translations (as shown 
+above) and call it with `./gradlew -b build-translate.gradle translate` if you file is 
+named `build-translate.gradle`.
+
 ## Versions
 
 Latest stable version is 1.1.4.
@@ -204,6 +217,8 @@ Latest snapshot is 1.1.5-SNAPSHOT.
 - Library update for gradle. 
 - Bugfix too much whitespaces and empty lines in xml.
 - Feature: Delete existing translation when updated=true && translatable=false
+
+### 1.1.5-SNAPSHOT
 
 
 
