@@ -221,6 +221,10 @@
     </organization>
     <repositories>
         <repository>
+            <id>maven.org</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
             <id>repo.gradle.org</id>
             <url>https://repo.gradle.org/gradle/libs-releases-local/</url>
         </repository>

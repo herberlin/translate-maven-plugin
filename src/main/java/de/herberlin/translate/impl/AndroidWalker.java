@@ -140,16 +140,12 @@ public class AndroidWalker implements FileWalker {
             setAllAttributes(sourceNode, targetNode);
             StringBuilder st = new StringBuilder();
             writeChildrenAsText(st, sourceNode);
-            String translated = sanitize(translator.translate(st.toString(), language));
+            String translated = translator.translate(st.toString(), language);
             targetNode.setTextContent(translated);
             log.debug("Translating: " + st + " -> " + translated);
             target.getDocumentElement().appendChild(targetNode);
         }
 
-    }
-
-    private String sanitize(String translated) {
-        return translated.replaceAll("<[\\w:/]*>", "");
     }
 
     private void writeChildrenAsText(StringBuilder result, Node sourceNode) {
