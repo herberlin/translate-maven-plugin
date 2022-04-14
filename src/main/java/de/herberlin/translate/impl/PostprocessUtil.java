@@ -8,6 +8,14 @@ public class PostprocessUtil {
     public static String process(String source, String translated) {
         String result = ucFirst(source, translated);
         result = clearSpacesInXliff(result);
+        result = removeXliffTags(result);
+        return result;
+    }
+
+    private static String removeXliffTags(String result) {
+        result = result.replaceAll("</?xliff:g>","");
+        result = result.replaceAll("&lt;/?xliff:g>","");
+        result = result.replaceAll("&lt;/?xliff:g&gt;","");
         return result;
     }
 

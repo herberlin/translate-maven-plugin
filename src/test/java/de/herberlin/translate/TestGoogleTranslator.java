@@ -34,7 +34,7 @@ public class TestGoogleTranslator {
     @Test
     public void fixXliffSpread() throws  Exception {
         String result = PostprocessUtil.process(source, googleResult);
-        Assert.assertEquals("تنبيه المرساة في<xliff:g> %1$s </xliff:g> من<xliff:g> %2$s </xliff:g> م.", result);
+        Assert.assertEquals("تنبيه المرساة في %1$s  من %2$s  م.", result);
     }
 
 }

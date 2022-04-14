@@ -71,6 +71,7 @@ public class AndroidWalker implements FileWalker {
             if (targetFileIsNew) {
                 targetDoc = builder.newDocument();
                 Element element = targetDoc.createElement("resources");
+                // element.setAttribute("xmlns:xliff","urn:oasis:names:tc:xliff:document:1.2");
                 targetDoc.appendChild(element);
                 Comment comment = targetDoc.createComment("Language: " + languageDisplayName);
                 element.appendChild(comment);

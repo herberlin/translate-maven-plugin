@@ -220,6 +220,7 @@ Latest snapshot is 1.1.5-SNAPSHOT.
 
 ### 1.1.5-SNAPSHOT
 - Bugfix: Google Translate `<xliff:g> %1$s </xliff:g>` transformed to arabic `<xliff:g> ٪ 1 $ s</xliff:g>`.
+- Remove `<xliff:g>` - Tag from output.
 
 
 
