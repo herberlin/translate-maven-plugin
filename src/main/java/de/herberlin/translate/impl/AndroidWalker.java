@@ -71,6 +71,7 @@ public class AndroidWalker implements FileWalker {
             if (targetFileIsNew) {
                 targetDoc = builder.newDocument();
                 Element element = targetDoc.createElement("resources");
+                // element.setAttribute("xmlns:xliff","urn:oasis:names:tc:xliff:document:1.2");
                 targetDoc.appendChild(element);
                 Comment comment = targetDoc.createComment("Language: " + languageDisplayName);
                 element.appendChild(comment);
@@ -140,16 +141,12 @@ public class AndroidWalker implements FileWalker {
             setAllAttributes(sourceNode, targetNode);
             StringBuilder st = new StringBuilder();
             writeChildrenAsText(st, sourceNode);
-            String translated = sanitize(translator.translate(st.toString(), language));
+            String translated = translator.translate(st.toString(), language);
             targetNode.setTextContent(translated);
             log.debug("Translating: " + st + " -> " + translated);
             target.getDocumentElement().appendChild(targetNode);
         }
 
-    }
-
-    private String sanitize(String translated) {
-        return translated.replaceAll("<[\\w:/]*>", "");
     }
 
     private void writeChildrenAsText(StringBuilder result, Node sourceNode) {
